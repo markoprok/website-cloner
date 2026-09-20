@@ -64,7 +64,15 @@ Cloning another site? Go back to the top of Part B — new Lovable project, same
 
 ## Local / Desktop (optional)
 
-The same `/clone-website` command works in a Claude Code session on your own machine (Claude desktop app, Code tab, or the CLI). The bundled headless browser in `.mcp.json` works there too. Only needed if you prefer working locally.
+The same `/clone-website` command works in a Claude Code session on your own machine (Claude desktop app, Code tab, or the CLI). Only needed if you prefer working locally.
+
+**One change is required to run locally.** `.mcp.json` is configured for the cloud sandbox, where the browser lives at a fixed path. On your own machine that path doesn't exist, so remove the last two arguments:
+
+```jsonc
+"--executable-path", "/opt/pw-browsers/chromium"   // delete this line locally
+```
+
+Then run `npx playwright install chromium` once. (The cloud sandbox needs the explicit path because its pre-installed browser build is older than the one `@playwright/mcp@latest` expects — without it the browser fails to launch and every clone stalls before it starts.)
 
 ---
 
